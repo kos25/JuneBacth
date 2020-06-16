@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>
+      Session 1
+    </title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <center>
+      <h1>Simple Javascript Based calculator</h1>
+    </center>
+    <div class="row">
+      <div class="col-sm-6" style="border: 1px solid; margin-left: 26%;">
+        <form>
+          <lable>First Number</lable>
+          <input class="form-control" type="Number" id="num1" />
+          <lable>Second Number</lable>
+          <input class="form-control" type="Number" id="num2" />
+          <span>Result : </span> <span id="Result">No Result</span>
+        </form>
+        <button onclick="Add()" class="btn btn-primary">Add</button>
+        <button onclick="SUB()" class="btn btn-primary">Sub</button>
+        <button onclick="Add()" class="btn btn-primary">MUL</button>
+        <button onclick="Add()" class="btn btn-primary">DIV</button>
+        <script>
+          function Add() {
+            var Num1 = document.getElementById("num1").value;
+            var Num2 = document.getElementById("num2").value;
+            var total = parseInt(Num1) + parseInt(Num2);
+            document.getElementById("Result").innerHTML = total;
+          }
+          function SUB() {
+            var Num1 = document.getElementById("num1").value;
+            var Num2 = document.getElementById("num2").value;
+            var total = parseInt(Num1) - parseInt(Num2);
+            document.getElementById("Result").innerHTML = total;
+          }
+        </script>
+      </div>
+    </div>
+  </body>
+</html>

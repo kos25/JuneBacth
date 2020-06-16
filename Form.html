@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration form</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+      body {
+        background-color: brown;
+      }
+      .container {
+        border: 5px solid blue;
+        height: 1000px;
+        width: 70%;
+        background-color: white;
+        margin: 5% 0% 5% 15%;
+        border-radius: 20px;
+      }
+      .fromContainer {
+        margin: 5%;
+        height: 600px;
+      }
+
+      .row {
+        padding: 2%;
+      }
+
+      .inptlabels {
+        font-size: 22px;
+        font-family: monospace;
+        margin-top: 5px;
+        font-weight: 500;
+      }
+
+      .inputfield {
+        width: 70%;
+        height: 35px;
+        background-color: lightgrey;
+        border: none;
+        border-radius: 8px;
+        font-size: 20px;
+        padding: 11px;
+      }
+
+      .inputbtn {
+        margin-top: 10px;
+        width: 100px;
+        height: 41px;
+        background-color: blue;
+        color: white;
+        font-size: 22px;
+        border: noe;
+        border: none;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <img
+            src="http://getwallpapers.com/wallpaper/full/8/7/3/651927.jpg"
+            width="100"
+            height="100"
+          />
+        </div>
+        <div class="col-sm-8">
+          <h1>Register Yourself</h1>
+        </div>
+      </div>
+
+      <div class="fromContainer">
+        <div class="row">
+          <div class="col-sm-6">
+            <label class="inptlabels">First Name</label> <br />
+            <input
+              class="inputfield"
+              type="text"
+              id="Firstname"
+              name="Firstname"
+              onkeyup="HideErrorMsg('errMsgFname')"
+            /><br />
+            <span id="errMsgFname"></span>
+          </div>
+          <div class="col-sm-6">
+            <label class="inptlabels">Last Name </label> <br />
+            <input
+              class="inputfield"
+              type="text"
+              id="Lastname"
+              name="Lastname"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <label class="inptlabels">Date Of Birth</label> <br />
+            <input class="inputfield" type="Date" id="Bday" name="Bday" />
+          </div>
+          <div class="col-sm-6">
+            <label class="inptlabels">Gender</label> <br />
+            <input type="radio" id="Male" name="Male" />
+            <label class="inptlabels">Male</label><br />
+            <input type="radio" id="Female" name="Female" />
+            <label class="inptlabels">Female</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <label class="inptlabels">Eamil</label> <br />
+            <input
+              class="inputfield"
+              type="text"
+              id="Eamil"
+              name="Eamil"
+              onkeyup="HideErrorMsg('errMsgEmail')"
+            /><br />
+            <span id="errMsgEmail"></span>
+          </div>
+          <div class="col-sm-6">
+            <label class="inptlabels">Phone Number </label> <br />
+            <input
+              class="inputfield"
+              type="text"
+              id="PhoneNumber"
+              name="PhoneNumber"
+              onkeyup="HideErrorMsg('errMsgPhone')"
+            /><br />
+            <span id="errMsgPhone"></span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <label class="inptlabels">Choose Subject</label> <br />
+            <select class="inputfield" style="height: 40px;" id="sub">
+              <option>--None--</option>
+              <option value="DSA">Data Structure and algoritham</option>
+              <option value="Java"> Programing in Java </option>
+              <option value="Python"> Programing in Python</option>
+              <option value=".NET"> Programing in .NET</option>
+            </select>
+            <br />
+            <input type="Checkbox" />
+            <label class="inptlabels"
+              >Please agree to
+              <a href="https://google.com" target="_blank"
+                >tearms and conditions</a
+              ></label
+            >
+            <br />
+            <button class="inputbtn" onclick="Vlidate()">Sumit</button>
+          </div>
+        </div>
+
+        <script>
+          function Vlidate() {
+            var Firstname = document.getElementById("Firstname").value;
+            var Lastname = document.getElementById("Lastname").value;
+            var Bday = document.getElementById("Bday").value;
+            var Male = document.getElementById("Male").checked;
+            var female = document.getElementById("Female").checked;
+            var Eamil = document.getElementById("Eamil").value;
+            var PhoneNumber = document.getElementById("PhoneNumber").value;
+            var subject = document.getElementById("sub").value;
+            /*
+            console.log("Firstname = " + Firstname);
+            console.log("Lastname = " + Lastname);
+            console.log("Bday = " + Bday);
+            console.log("Male = " + Male);
+            console.log("female = " + female);
+            console.log("Eamil = " + Eamil);
+            console.log("PhoneNumber = " + PhoneNumber);  */
+            // console.log("subject =" + subject);
+            if (!Firstname) {
+              document.getElementById("errMsgFname").style.display = "block";
+              document.getElementById("errMsgFname").innerHTML =
+                "Please eneter First Name";
+              document.getElementById("errMsgFname").style.fontSize = "20px";
+              document.getElementById("errMsgFname").style.color = "red";
+            }
+
+            if (!Eamil) {
+              document.getElementById("errMsgEmail").style.display = "block";
+              document.getElementById("errMsgEmail").innerHTML =
+                "Please Enter Email";
+              document.getElementById("errMsgEmail").style.fontSize = "20px";
+              document.getElementById("errMsgEmail").style.color = "red";
+            } else if (!ValidateEmail(Eamil)) {
+              document.getElementById("errMsgEmail").style.display = "block";
+              document.getElementById("errMsgEmail").innerHTML =
+                "Please Enter valid  Email";
+              document.getElementById("errMsgEmail").style.fontSize = "20px";
+              document.getElementById("errMsgEmail").style.color = "red";
+            }
+
+            if (!PhoneNumber) {
+              document.getElementById("errMsgPhone").style.display = "block";
+              document.getElementById("errMsgPhone").innerHTML =
+                "Please Enter Phone Number";
+              document.getElementById("errMsgPhone").style.fontSize = "20px";
+              document.getElementById("errMsgPhone").style.color = "red";
+            }
+            if (isNaN(PhoneNumber) || PhoneNumber.length < 10) {
+              document.getElementById("errMsgPhone").style.display = "block";
+              document.getElementById("errMsgPhone").innerHTML =
+                "Please Enter Valid Phone Number";
+              document.getElementById("errMsgPhone").style.fontSize = "20px";
+              document.getElementById("errMsgPhone").style.color = "red";
+            }
+          }
+
+          function ValidateEmail(mail) {
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+              return true;
+            }
+            return false;
+          }
+
+          function HideErrorMsg(val) {
+            document.getElementById(val).style.display = "none";
+          }
+        </script>
+
+        <!-- 
+  <label for="cars">Choose a car:</label>
+      <select  name="cars" id="cars">
+     <optgroup label="Swedish Cars">
+       <option value="volvo">Volvo</option>
+       <option value="saab">Saab</option>
+    </optgroup>
+     <optgroup label="German Cars">
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+   </optgroup>
+  <optgroup label="Indian Cars">
+  <option value="TATA">TATA</option>
+  <option value="Maruti">Maruti</option>
+  <option value="Mahinda">Mahindra</option>
+    </optgroup>
+</select>
+-->
+      </div>
+    </div>
+  </body>
+</html>
