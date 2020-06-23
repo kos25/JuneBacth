@@ -38,7 +38,7 @@ def createContact():
     DOB = data["DOB"]
     Email = data["Email"]
     Gender = data["Gender"]
-    PhoneNumber = data["PhoneNumber"]
+    Phonenumber = data["Phonenumber"]
     cs = ContactInfo(FirstName,LastName,DOB ,Email,Gender,Phonenumber)
     db.session.add(cs)
     db.session.commit()
@@ -59,10 +59,6 @@ def showContacts():
         c["Phonenumber"] = con.Phonenumber
         contList.append(c)
     return jsonify(list=contList)
-
-
-
-
 
 
 @app.route('/')

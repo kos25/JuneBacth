@@ -10,6 +10,11 @@
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"
+      integrity="sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg="
+      crossorigin="anonymous"
+    ></script>
     <style>
       body {
         background-color: brown;
@@ -62,6 +67,22 @@
     </style>
   </head>
   <body>
+    <button onclick="getcontacts()" class="btn">get contacts</button>
+
+    <table class="table" style="margin: 5%; background: white;">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">FirstName</th>
+          <th scope="col">LastName</th>
+          <th scope="col">DOB</th>
+          <th scope="col">Email</th>
+          <th scope="col">Gender</th>
+          <th scope="col">PhoneNumber</th>
+        </tr>
+      </thead>
+      <tbody id="tabledata"></tbody>
+    </table>
+
     <div class="container">
       <div class="row">
         <div class="col-sm-4">
@@ -164,24 +185,26 @@
 
         <script>
           function Vlidate() {
+            var validationpased = true;
             var Firstname = document.getElementById("Firstname").value;
             var Lastname = document.getElementById("Lastname").value;
-            var Bday = document.getElementById("Bday").value;
+            var DOB = document.getElementById("Bday").value;
             var Male = document.getElementById("Male").checked;
             var female = document.getElementById("Female").checked;
             var Eamil = document.getElementById("Eamil").value;
             var PhoneNumber = document.getElementById("PhoneNumber").value;
             var subject = document.getElementById("sub").value;
             /*
-            console.log("Firstname = " + Firstname);
-            console.log("Lastname = " + Lastname);
-            console.log("Bday = " + Bday);
-            console.log("Male = " + Male);
-            console.log("female = " + female);
-            console.log("Eamil = " + Eamil);
-            console.log("PhoneNumber = " + PhoneNumber);  */
+          console.log("Firstname = " + Firstname);
+          console.log("Lastname = " + Lastname);
+          console.log("Bday = " + Bday);
+          console.log("Male = " + Male);
+          console.log("female = " + female);
+          console.log("Eamil = " + Eamil);
+          console.log("PhoneNumber = " + PhoneNumber);  */
             // console.log("subject =" + subject);
             if (!Firstname) {
+              validationpased = false;
               document.getElementById("errMsgFname").style.display = "block";
               document.getElementById("errMsgFname").innerHTML =
                 "Please eneter First Name";
@@ -217,6 +240,25 @@
               document.getElementById("errMsgPhone").style.fontSize = "20px";
               document.getElementById("errMsgPhone").style.color = "red";
             }
+            if (validationpased) {
+              alert("test");
+              var parms = {
+                FirstName: Firstname,
+                LastName: Lastname,
+                DOB: DOB,
+                Email: Eamil,
+                Gender: "Male",
+                Phonenumber: PhoneNumber,
+              };
+
+              const PostContactUrl = "http://127.0.0.1:5000/contact";
+              axios
+                .post(PostContactUrl, parms)
+                .then((res) => {
+                  alert(res);
+                })
+                .catch((err) => alert(err));
+            }
           }
 
           function ValidateEmail(mail) {
@@ -229,24 +271,57 @@
           function HideErrorMsg(val) {
             document.getElementById(val).style.display = "none";
           }
+
+          function getcontacts() {
+            const getContactUrl = "http://127.0.0.1:5000/contact";
+            axios
+              .get(getContactUrl)
+              .then((res) => {
+                console.log(res);
+                tablebody = document.getElementById("tabledata");
+                for (var i = 0; i < res.data.list.length; i++) {
+                  var tr = document.createElement("tr");
+                  var FirstName = document.createElement("td");
+                  var LastName = document.createElement("td");
+                  var DOB = document.createElement("td");
+                  var Email = document.createElement("td");
+                  var Gender = document.createElement("td");
+                  var PhoneNumber = document.createElement("td");
+                  FirstName.innerHTML = res.data.list[i].FirstName;
+                  LastName.innerHTML = res.data.list[i].LastName;
+                  DOB.innerHTML = res.data.list[i].DOB;
+                  Email.innerHTML = res.data.list[i].Email;
+                  Gender.innerHTML = res.data.list[i].Gender;
+                  PhoneNumber.innerHTML = res.data.list[i].PhoneNumber;
+                  tr.appendChild(FirstName);
+                  tr.appendChild(LastName);
+                  tr.appendChild(DOB);
+                  tr.appendChild(Email);
+                  tr.appendChild(Gender);
+                  tr.appendChild(PhoneNumber);
+                  tablebody.appendChild(tr);
+                }
+              })
+              .catch((err) => alert(err));
+          }
         </script>
 
         <!-- 
-  <label for="cars">Choose a car:</label>
-      <select  name="cars" id="cars">
-     <optgroup label="Swedish Cars">
-       <option value="volvo">Volvo</option>
-       <option value="saab">Saab</option>
-    </optgroup>
-     <optgroup label="German Cars">
-      <option value="mercedes">Mercedes</option>
-      <option value="audi">Audi</option>
-   </optgroup>
-  <optgroup label="Indian Cars">
-  <option value="TATA">TATA</option>
-  <option value="Maruti">Maruti</option>
-  <option value="Mahinda">Mahindra</option>
-    </optgroup>
+<label for="cars">Choose a car:</label>
+    <select  name="cars" id="cars">
+    <optgroup label="Swedish Cars">
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+  </optgroup>
+    <optgroup label="German Cars">
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+  </optgroup>
+<optgroup label="Indian Cars">
+<option value="TATA">TATA</option>
+<option value="Maruti">Maruti</option>
+<option value="Mahinda">Mahindra</option>
+  </optgroup>
 </select>
 -->
       </div>
